@@ -18,6 +18,7 @@ in
     ./quickshell
     ./obsidian
     ./theme
+    ./gallery-dl
   ];
 
   home.username = vars.username;
