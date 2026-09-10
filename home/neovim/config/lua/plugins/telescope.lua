@@ -1,0 +1,307 @@
+-- Aurora Telescope
+
+local telescope = require("telescope")
+local actions = require("telescope.actions")
+local builtin = require("telescope.builtin")
+
+-- Telescope Setup
+
+telescope.setup({
+
+	-- Defaults
+
+	defaults = {
+
+		-- Layout
+
+		layout_strategy = "horizontal",
+
+		layout_config = {
+			horizontal = {
+				width = 0.90,
+				height = 0.85,
+
+				preview_width = 0.50,
+
+				prompt_position = "bottom",
+			},
+		},
+
+		winblend = 12,
+
+		-- Borders
+
+		border = true,
+
+		borderchars = {
+
+			prompt = {
+				"─",
+				"│",
+				"─",
+				"│",
+				"╭",
+				"╮",
+				"╯",
+				"╰",
+			},
+
+			results = {
+				"─",
+				"│",
+				"─",
+				"│",
+				"╭",
+				"╮",
+				"╯",
+				"╰",
+			},
+
+			preview = {
+				"─",
+				"│",
+				"─",
+				"│",
+				"╭",
+				"╮",
+				"╯",
+				"╰",
+			},
+		},
+
+		-- Sorting
+
+		sorting_strategy = "ascending",
+
+		-- Prompt
+
+		prompt_prefix = " 󰍉  ",
+
+		selection_caret = " 󰜴 ",
+
+		entry_prefix = "   ",
+
+		initial_mode = "insert",
+
+		-- Paths
+
+		path_display = {
+			"truncate",
+		},
+
+		-- Ignore noisy directories
+
+		file_ignore_patterns = {
+			"%.git/",
+			"node_modules/",
+			"target/",
+			"dist/",
+			"build/",
+			"result/",
+		},
+
+		-- Mappings
+
+		mappings = {
+
+			-- Insert Mode
+
+			i = {
+
+				["<C-j>"] =
+					actions.move_selection_next,
+
+				["<C-k>"] =
+					actions.move_selection_previous,
+
+				["<C-q>"] =
+					actions.send_selected_to_qflist,
+
+				["<Esc>"] =
+					actions.close,
+			},
+
+			-- Normal Mode
+
+			n = {
+
+				["q"] =
+					actions.close,
+
+				["<Esc>"] =
+					actions.close,
+
+				["j"] =
+					actions.move_selection_next,
+
+				["k"] =
+					actions.move_selection_previous,
+
+				["<C-q>"] =
+					actions.send_selected_to_qflist,
+			},
+		},
+	},
+
+	-- Pickers
+
+	pickers = {
+
+		-- Find Files
+
+		find_files = {
+			hidden = false,
+			no_ignore = false,
+			follow = true,
+		},
+
+		-- Buffers
+
+		buffers = {
+			sort_lastused = true,
+			ignore_current_buffer = false,
+			theme = "dropdown",
+		},
+
+		-- Help
+
+		help_tags = {
+			theme = "dropdown",
+		},
+
+		-- Commands
+
+		commands = {
+			theme = "dropdown",
+		},
+
+		-- Diagnostics
+
+		diagnostics = {
+			theme = "ivy",
+		},
+	},
+
+	-- Extensions
+
+	extensions = {
+		fzf = {
+			fuzzy = true,
+
+			override_generic_sorter = true,
+			override_file_sorter = true,
+
+			-- Matches the ignorecase + smartcase pair in core/options.lua.
+			case_mode = "smart_case",
+		},
+	},
+})
+
+pcall(telescope.load_extension, "fzf")
+
+-- Keymaps
+
+local map = vim.keymap.set
+
+local opts = {
+	noremap = true,
+	silent = true,
+}
+
+-- Find Files
+
+map(
+	"n",
+	"<leader>ff",
+	builtin.find_files,
+	vim.tbl_extend("force", opts, {
+		desc = "Find files",
+	})
+)
+
+-- Live Grep
+
+map(
+	"n",
+	"<leader>fg",
+	builtin.live_grep,
+	vim.tbl_extend("force", opts, {
+		desc = "Live grep",
+	})
+)
+
+-- Buffers
+
+map(
+	"n",
+	"<leader>fb",
+	builtin.buffers,
+	vim.tbl_extend("force", opts, {
+		desc = "Buffers",
+	})
+)
+
+-- Recent Files
+
+map(
+	"n",
+	"<leader>fr",
+	builtin.oldfiles,
+	vim.tbl_extend("force", opts, {
+		desc = "Recent files",
+	})
+)
+
+-- Diagnostics
+
+map(
+	"n",
+	"<leader>fd",
+	builtin.diagnostics,
+	vim.tbl_extend("force", opts, {
+		desc = "Diagnostics",
+	})
+)
+
+-- Help
+
+map(
+	"n",
+	"<leader>fh",
+	builtin.help_tags,
+	vim.tbl_extend("force", opts, {
+		desc = "Help",
+	})
+)
+
+-- Commands
+
+map(
+	"n",
+	"<leader>fc",
+	builtin.commands,
+	vim.tbl_extend("force", opts, {
+		desc = "Commands",
+	})
+)
+
+-- Current Buffer Search
+
+map(
+	"n",
+	"<leader>fo",
+	builtin.current_buffer_fuzzy_find,
+	vim.tbl_extend("force", opts, {
+		desc = "Search buffer",
+	})
+)
+
+-- Telescope Prompt
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "TelescopePrompt",
+
+	callback = function(args)
+		vim.bo[args.buf].buflisted = false
+	end,
+})
