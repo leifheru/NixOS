@@ -335,9 +335,9 @@ hl.window_rule({
 		class = "^zen$",
 	},
 
-	opacity = "0.92 override 0.92 override 0.92 override",
+	opacity = "1.0 override 1.0 override 1.0 override",
 
-	xray = true,
+	-- xray = true,
 })
 
 -- Zen Google Authentication
