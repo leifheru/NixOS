@@ -19,8 +19,7 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(vars.note))
 -- Change Colorscheme
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(vars.colorscheme))
 
--- Window Management
-
+-- Window Manager
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 
 -- Screenshot
