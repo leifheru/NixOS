@@ -565,20 +565,6 @@ hl.window_rule({
 	dim_around = true,
 })
 
--- DaVinci Resolve
-
-hl.window_rule({
-	name = "davinci-resolve",
-
-	match = {
-		class = "^resolve$",
-	},
-
-	opacity = "1.0 override 1.0 override",
-
-	xray = true,
-})
-
 -- VLC
 
 hl.window_rule({

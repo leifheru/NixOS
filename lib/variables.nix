@@ -1,5 +1,3 @@
-# Identity
-
 {
   # Linux account name.
   username = "vivo";
@@ -21,7 +19,5 @@
   # Hardware / driver preferences. The installer detects these automatically.
   nvidia = {
     enable = false;
-    intelBusId = "PCI:0@0:2:0";
-    nvidiaBusId = "PCI:1@0:0:0";
   };
 }
