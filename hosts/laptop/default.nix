@@ -27,7 +27,6 @@ in
     ../../modules/power
     ../../modules/stylix
     ../../modules/development
-    ../../modules/ai
     ../../modules/creator
     ../../modules/virtualisation
     ../../modules/hardware/kreo-rgb

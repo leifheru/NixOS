@@ -9,10 +9,14 @@
     cmake
     pkg-config
 
+    # zed nix-support
+    zed-editor
+    nil
+    nixd
     # Development utilities
     git-lfs
     shellcheck
-    zed-editor
+
     opencode
 
     # Rust
