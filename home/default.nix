@@ -13,7 +13,6 @@ in
     ./fastfetch
     ./ssh
     ./xdg
-    ./neovim
     ./hyprland
     ./quickshell
     ./obsidian

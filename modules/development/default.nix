@@ -13,6 +13,7 @@
     zed-editor
     nil
     nixd
+    qt6.qtdeclarative
     # Development utilities
     git-lfs
     shellcheck
